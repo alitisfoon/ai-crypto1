@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>تحلیل‌گر هوشمند رمزارز | TON و USDT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">AI</div>
+      <div><strong>تحلیل‌گر رمزارز</strong><small>TON / USDT</small></div>
+    </div>
+    <div class="top-actions">
+      <span class="live-dot">● داده بازار</span>
+      <button id="refreshBtn" class="btn btn-outline">به‌روزرسانی</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">داشبورد تحلیل بازار</p>
+        <h1>تصمیم آگاهانه‌تر با تحلیل داده</h1>
+        <p class="muted">قیمت بازار، شاخص‌های تکنیکال و تحلیل هوشمند TON/USDT</p>
+      </div>
+      <div class="market-select">
+        <label for="intervalSelect">بازه تحلیل</label>
+        <select id="intervalSelect">
+          <option value="15m">۱۵ دقیقه</option>
+          <option value="1h" selected>۱ ساعت</option>
+          <option value="4h">۴ ساعت</option>
+          <option value="1d">روزانه</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="cards">
+      <article class="panel price-panel">
+        <div class="panel-heading"><span>قیمت TON</span><span class="coin-icon ton">T</span></div>
+        <div id="tonPrice" class="big-number">در حال دریافت…</div>
+        <div id="tonChange" class="change muted">تغییر ۲۴ ساعته: —</div>
+        <div class="subline">جفت‌ارز TON/USDT</div>
+      </article>
+      <article class="panel">
+        <div class="panel-heading"><span>قیمت تتر</span><span class="coin-icon usdt">₮</span></div>
+        <div class="big-number">۱٫۰۰ <small>USDT</small></div>
+        <div class="change muted">ارز مبنای این تحلیل</div>
+        <div class="subline">قیمت بازار تتر ممکن است اندکی نوسان داشته باشد.</div>
+      </article>
+      <article class="panel">
+        <div class="panel-heading"><span>شاخص RSI</span><span class="tag">۱۴ دوره</span></div>
+        <div id="rsiValue" class="big-number">—</div>
+        <div id="rsiText" class="change muted">در انتظار داده</div>
+        <div class="subline">کمتر از ۳۰: اشباع فروش؛ بیشتر از ۷۰: اشباع خرید</div>
+      </article>
+    </section>
+
+    <section class="grid-main">
+      <article class="panel chart-panel">
+        <div class="section-heading">
+          <div><h2>نمودار قیمت TON</h2><p class="muted">قیمت پایانی کندل‌ها برحسب USDT</p></div>
+          <span id="chartStatus" class="tag">در حال بارگذاری</span>
+        </div>
+        <canvas id="priceChart" height="260" aria-label="نمودار قیمت TON"></canvas>
+        <div class="chart-legend"><span><i class="legend-line"></i> قیمت پایانی</span><span id="updatedAt">آخرین به‌روزرسانی: —</span></div>
+      </article>
+
+      <article class="panel signal-panel">
+        <div class="section-heading"><div><h2>تحلیل هوش مصنوعی</h2><p class="muted">تحلیل مدل زبانی بر پایه داده واقعی بازار</p></div></div>
+        <button id="aiAnalyzeBtn" class="btn btn-ai">تحلیل با هوش مصنوعی</button>
+        <div id="aiStatus" class="ai-status">برای دریافت تحلیل هوشمند، دکمه را بزن.</div>
+        <div id="aiResult" class="ai-result" aria-live="polite">هنوز تحلیلی انجام نشده است.</div>
+        <div class="section-heading" style="margin-top:18px"><div><h2>شاخص‌های تکنیکال</h2><p class="muted">محاسبه‌شده از داده‌های بازار</p></div></div>
+        <div id="signalBox" class="signal-box neutral">
+          <span id="signalIcon">…</span>
+          <strong id="signalTitle">در حال تحلیل</strong>
+          <p id="signalDesc">پس از دریافت داده‌های بازار، نتیجه نمایش داده می‌شود.</p>
+        </div>
+        <div class="metric-row"><span>EMA کوتاه‌مدت (۹)</span><strong id="emaFast">—</strong></div>
+        <div class="metric-row"><span>EMA بلندمدت (۲۱)</span><strong id="emaSlow">—</strong></div>
+        <div class="metric-row"><span>حد ضرر نمونه</span><strong id="stopLoss">—</strong></div>
+        <div class="metric-row"><span>هدف نمونه</span><strong id="takeProfit">—</strong></div>
+        <p class="fine-print">حد ضرر و هدف صرفاً نمونه آموزشی هستند و پیشنهاد شخصی سرمایه‌گذاری نیستند.</p>
+      </article>
+    </section>
+
+    <section class="panel how-panel">
+      <h2>این تحلیل چگونه کار می‌کند؟</h2>
+      <div class="how-grid">
+        <div><b>۱. دریافت داده</b><p>قیمت و کندل‌ها از API عمومی بازار دریافت می‌شوند.</p></div>
+        <div><b>۲. محاسبه شاخص‌ها</b><p>میانگین متحرک نمایی و RSI روی داده‌ها محاسبه می‌شوند.</p></div>
+        <div><b>۳. نتیجه آزمایشی</b><p>سیستم بر اساس قواعد ساده، خرید، فروش یا صبر را نشان می‌دهد.</p></div>
+      </div>
+    </section>
+
+    <div id="errorBox" class="error-box" hidden></div>
+    <footer>نسخه آزمایشی ۱٫۰ · فقط برای آموزش و بررسی داده‌ها · بدون اتصال به کیف پول یا امکان معامله</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
